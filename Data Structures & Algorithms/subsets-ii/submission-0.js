@@ -1,0 +1,26 @@
+class Solution {
+    /**
+     * @param {number[]} nums
+     * @return {number[][]}
+     */
+    subsetsWithDup(nums) {
+        nums.sort((a,b)=> a-b);
+
+        const res = [];
+        let stack = [];
+
+        function backtrack(start){
+            res.push([...stack]);
+
+            for(let i = start; i< nums.length;i++){
+                if(i !== start && nums[i] === nums[i-1]) continue;
+                stack.push(nums[i]);
+                backtrack(i+1);
+                stack.pop();
+            }
+        }
+
+        backtrack(0);
+        return res;
+    }
+}
